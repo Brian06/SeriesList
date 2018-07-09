@@ -9,5 +9,5 @@ export const insertUser = async userData => {
   const table = 'users';
 
   const queryResult =  await dbConnection(table).insert({ email: email, name:name, password:password, sex:sex });
-  return queryResult.length ? queryResult[0] : null;
+  return queryResult.rowCount>0 ? true : false;
 };

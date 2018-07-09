@@ -3,14 +3,12 @@ import { insertUser } from './signUpDao';
 export const signUpService = async userData => {
   const result = await insertUser(userData);
 
-  console.log(result)
-
-  if (result) {
-    const error = { type: 'error', msg: 'Cannot find user/password' };
+  if (!result) {
+    const error = { type: 'error', msg: 'Cannot insert the new user' };
     return error;
   }
   else {
-    const inserted = { type: 'success', msg: 'User inserted' };
+    const inserted = { success: true, message: 'User Inserted!' };
     return inserted;
   };
 };
