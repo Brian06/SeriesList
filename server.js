@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import { routes } from './server/routes';
 
 let app = express();
 app.use(bodyParser.json());
@@ -17,9 +18,11 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.get('/test', (req, res) => {
+/*app.get('/test', (req, res) => {
   res.send('Hello World!');
-});
+});*/
+
+routes(app);
 
 let port = process.env.PORT || 3001;
 
