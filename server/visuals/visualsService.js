@@ -1,4 +1,4 @@
-import { getVisuals, getVisualById, insertVisual } from './visualsDao';
+import { getVisuals, getVisualById, insertVisual, updateWholeVisual } from './visualsDao';
 
 export const getAllVisuals = async () => {
   const result = await getVisuals();
@@ -36,6 +36,21 @@ export const addNewVisual = async visual => {
   }
   else {
     const success = { type: 'success', result: 'Visual Inserted' };
+    return success;
+  };
+
+};
+
+export const updateTotalVisual = async visual => {
+  
+  const result = await updateWholeVisual(visual);
+
+  if (!result) {
+    const error = { type: 'error', msg: 'Cannot update the visual' };
+    return error;
+  }
+  else {
+    const success = { type: 'success', result: 'Visual updated' };
     return success;
   };
 
