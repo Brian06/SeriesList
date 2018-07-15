@@ -56,16 +56,16 @@ export const updateWholeVisual = async visual => {
 
 };
 
-export const updatePartialVisual = async (id, body) => {
+export const deleteVisual = async id => {
   
-  const result = await visualsDao.updatePartialVisual(id,body);
+  const result = await visualsDao.deleteVisual(id);
 
   if (!result) {
-    const error = { type: 'error', msg: 'Cannot update the visual' };
+    const error = { type: 'error', msg: 'Cannot delete the visual' };
     return error;
   }
   else {
-    const success = { type: 'success', result: 'Visual updated' };
+    const success = { type: 'success', result: 'Visual deleted' };
     return success;
   };
 

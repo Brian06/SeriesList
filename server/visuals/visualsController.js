@@ -144,3 +144,22 @@ export const updatePartialVisual = async (req, res) => {
   }
     
 };
+
+export const deleteVisual = async (req, res) => {
+
+  const id = req.params._id;
+  
+  if (!id) {
+    res.send({ error: { status:404, message: 'You need an id', code: 10 }});
+    return res;
+  };
+
+  const result = await visualsService.deleteVisual(id);
+
+  if (result.type == 'error') 
+    res.send({ error: { status:400, message: result.msg, code: 10 }});
+  else{
+    res.send({ sucess: result.result });
+  }
+    
+};

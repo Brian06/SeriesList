@@ -88,7 +88,17 @@ export const updatePartialVisual = async (id,body) => {
   
   const table = 'visuals';
 
-  const queryResult =  await dbConnection(table).where('id', id).update(body)
+  const queryResult =  await dbConnection(table).where('id', id).update(body);
+  
+  return queryResult>0 ? true : false;
+};
+
+export const deleteVisual = async id => {
+  
+  const table = 'visuals';
+
+  const queryResult =  await dbConnection(table).where('id', id).del();
+  console.log(queryResult);
   
   return queryResult>0 ? true : false;
 };
