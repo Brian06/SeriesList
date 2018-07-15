@@ -12,6 +12,6 @@ export const routes = app => {
   app.get('/visuals/:_id', verifyToken, getVisualById);
   app.post('/visuals', verifyToken, insertVisual);
   app.put('/visuals/:_id', verifyToken, updateWholeVisual);
-  //app.patch('/visuals/:_id', verifyToken, updatePartialVisual);
+  app.patch('/visuals/:_id', verifyToken, updatePartialVisual);
 
 };

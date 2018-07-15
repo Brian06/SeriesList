@@ -81,5 +81,14 @@ export const updateWholeVisual = async visual => {
     type: type
   })
   
-  return queryResult.rowCount>0 ? true : false;
+  return queryResult>0 ? true : false;
+};
+
+export const updatePartialVisual = async (id,body) => {
+  
+  const table = 'visuals';
+
+  const queryResult =  await dbConnection(table).where('id', id).update(body)
+  
+  return queryResult>0 ? true : false;
 };
