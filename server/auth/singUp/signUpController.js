@@ -6,9 +6,10 @@ export const signUp = async (req, res) => {
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   const email = req.body.email;
   const name = req.body.name;
+  const type = req.body.type;
   const sex = req.body.sex;
 
-  if (!email || !hashedPassword || !name || !sex) {
+  if (!email || !hashedPassword || !name || !sex || !type) {
     res.send({ error: { status:404, message: 'You need all the data', code: 10 }});
     return res;
   };
@@ -17,6 +18,7 @@ export const signUp = async (req, res) => {
     email: email,
     password: hashedPassword,
     name: name,
+    type: type,
     sex: sex
   };
 

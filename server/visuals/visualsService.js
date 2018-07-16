@@ -28,7 +28,7 @@ export const getVisualById = async visualId => {
 
 export const insertVisual = async visual => {
   
-  const result = await visualsDao.vinsertVisual(visual);
+  const result = await visualsDao.insertVisual(visual);
 
   if (!result) {
     const error = { type: 'error', msg: 'Cannot change the visual' };
