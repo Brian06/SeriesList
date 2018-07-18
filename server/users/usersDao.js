@@ -25,9 +25,10 @@ export const updateWholeUser = async userData => {
   const type = userData.type;
   const sex = userData.sex;
   const table = 'users';
+  let queryResult = false;
 
   try {
-    const queryResult =  await dbConnection(table).where('id', id).update({
+    queryResult =  await dbConnection(table).where('id', id).update({
       email: email,
       password: password,
       name: name,
@@ -43,7 +44,7 @@ export const updateWholeUser = async userData => {
 
 export const updatePartialUser = async (id,body) => {
   
-  const table = 'visuals';
+  const table = 'users';
 
   const queryResult =  await dbConnection(table).where('id', id).update(body);
   
@@ -52,10 +53,9 @@ export const updatePartialUser = async (id,body) => {
 
 export const deleteUser = async id => {
   
-  const table = 'visuals';
+  const table = 'users';
 
   const queryResult =  await dbConnection(table).where('id', id).del();
-  console.log(queryResult);
   
   return queryResult>0 ? true : false;
 };

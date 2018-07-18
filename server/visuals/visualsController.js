@@ -163,3 +163,43 @@ export const deleteVisual = async (req, res) => {
   }
     
 };
+
+export const addVisualToUser = async (req, res) => {
+
+  const idVisual = req.params._idVisual;
+  const idUser = req.params._idUser;
+  
+  if (!idVisual || !idUser) {
+    res.send({ error: { status:404, message: 'You need the two ids', code: 10 }});
+    return res;
+  };
+
+  const result = await visualsService.addVisualToUser(idVisual,idUser);
+
+  if (result.type == 'error') 
+    res.send({ error: { status:400, message: result.msg, code: 10 }});
+  else{
+    res.send({ sucess: result.result });
+  }
+    
+};
+
+export const getVisualsByUserId = async (req, res) => {
+
+  const idUser = req.params._idUser;
+  
+  if (!idUser) {
+    res.send({ error: { status:404, message: 'You need the user id', code: 10 }});
+    return res;
+  };
+
+  const result = await visualsService.getVisualsByUserId(idUser);
+
+  if (result.type == 'error') 
+    res.send({ error: { status:400, message: result.msg, code: 10 }});
+  else{
+    res.send({ sucess: result.result });
+  }
+    
+};
+

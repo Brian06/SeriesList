@@ -9,9 +9,11 @@ export const routes = app => {
   app.post('/signUp', signUp);
   app.post('/login', login);
 
-  app.get('/visuals', verifyToken, visualsController.getVisuals);
-  app.get('/visuals/:_id', verifyToken, visualsController.getVisualById);
+  app.get('/visuals', verifyToken, visualsController.getVisuals); //TODO add all the info
+  app.get('/visuals/:_id', verifyToken, visualsController.getVisualById); //TODO add all the info score..
+  app.get('/userVisuals/:_idUser', verifyToken, visualsController.getVisualsByUserId); //TODO add all the info score..
   app.post('/visuals', verifyToken, visualsController.insertVisual);
+  app.post('/visuals/:_idVisual/:_idUser', verifyToken, visualsController.addVisualToUser);
   app.put('/visuals/:_id', verifyToken, visualsController.updateWholeVisual);
   app.patch('/visuals/:_id', verifyToken, visualsController.updatePartialVisual);
   app.delete('/visuals/:_id', verifyToken, visualsController.deleteVisual);

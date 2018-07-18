@@ -43,16 +43,31 @@ export const updateWholeUser = async userData => {
 
 };
 
+export const updatePartialUser = async (id,body) => {
+  
+  const result = await usersDao.updatePartialUser(id,body);
+
+  if (!result) {
+    const error = { type: 'error', msg: 'Cannot update the user' };
+    return error;
+  }
+  else {
+    const success = { type: 'success', result: 'User updated' };
+    return success;
+  };
+
+};
+
 export const deleteUser = async id => {
   
   const result = await usersDao.deleteUser(id);
 
   if (!result) {
-    const error = { type: 'error', msg: 'Cannot delete the visual' };
+    const error = { type: 'error', msg: 'Cannot delete the user' };
     return error;
   }
   else {
-    const success = { type: 'success', result: 'Visual deleted' };
+    const success = { type: 'success', result: 'User deleted' };
     return success;
   };
 

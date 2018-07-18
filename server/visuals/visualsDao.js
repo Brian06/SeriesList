@@ -102,3 +102,25 @@ export const deleteVisual = async id => {
   
   return queryResult>0 ? true : false;
 };
+
+export const addVisualToUser = async (idVisual,idUser) => {
+  
+  const table = 'uservisuals';
+
+  const queryResult =  await dbConnection(table).insert({ idvisuals:idVisual, iduser:idUser });
+  
+  return queryResult.rowCount>0 ? true : false;
+};
+
+export const getVisualsByUserId = async (idUser) => {
+  
+  const table = 'uservisuals';
+
+  //const queryResult =  await dbConnection(table).insert({ idVisuals:idVisual, idUser:idUser });
+  //console.log(queryResult);
+  
+  //return queryResult>0 ? true : false;
+};
+
+
+

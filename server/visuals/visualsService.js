@@ -56,6 +56,21 @@ export const updateWholeVisual = async visual => {
 
 };
 
+export const updatePartialVisual = async (id,body) => {
+  
+  const result = await usersDao.updatePartialVisual(id,body);
+
+  if (!result) {
+    const error = { type: 'error', msg: 'Cannot update the visual' };
+    return error;
+  }
+  else {
+    const success = { type: 'success', result: 'Visual updated' };
+    return success;
+  };
+
+};
+
 export const deleteVisual = async id => {
   
   const result = await visualsDao.deleteVisual(id);
@@ -66,6 +81,36 @@ export const deleteVisual = async id => {
   }
   else {
     const success = { type: 'success', result: 'Visual deleted' };
+    return success;
+  };
+
+};
+
+export const addVisualToUser = async (idVisual,idUser) => {
+  
+  const result = await visualsDao.addVisualToUser(idVisual,idUser);
+
+  if (!result) {
+    const error = { type: 'error', msg: 'Cannot add the visual' };
+    return error;
+  }
+  else {
+    const success = { type: 'success', result: 'Visual added' };
+    return success;
+  };
+
+};
+
+export const getVisualsByUserId = async (idUser) => {
+  
+  const result = await visualsDao.getVisualsByUserId(idUser);
+
+  if (!result) {
+    const error = { type: 'error', msg: 'Cannot get the visual' };
+    return error;
+  }
+  else {
+    const success = { type: 'success', result: result.result };
     return success;
   };
 

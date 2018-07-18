@@ -33,7 +33,7 @@ export const getUserById = async (req, res) => {
 };
 
 export const updateWholeUser = async (req, res) => {
-  console.log(req.body.password);
+  
   const id = req.params._id;
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
   const email = req.body.email;
