@@ -3,7 +3,15 @@ import { dbConnection } from '../database/db';
 export const getVisuals = async () => {
   const table = 'visuals';
 
-  const queryResult =  await dbConnection(table).select('*');
+  //const queryResult =  await dbConnection(table).select('*');
+  const queryResult =  await dbConnection.select(dbConnection.raw('AVG(uv.score::float) as averageScore'),
+  dbConnection.raw("count(case when uv.favorite = 'true' then 1 else null end) as numFavorites"),
+  dbConnection.raw("count(case when uv.score != 0 then 1 else null end) as numScored"),'v.name', 
+  'v.id', 'v.name', 'v.episodes', 'v.type', 'v.actors', 'v.alternativetitles', 'v.director', 'v.genres',
+  'v.rating', 'v.realeasedate', 'v.studio', 'v.synopsis', 'v.duration')
+  .from('visuals as v').leftJoin('uservisuals as uv', 'uv.idvisuals', 'v.id')
+  .groupByRaw('v.id')
+
 
   return queryResult.length ? queryResult : null;
 };
