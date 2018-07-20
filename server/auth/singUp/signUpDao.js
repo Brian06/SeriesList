@@ -8,7 +8,18 @@ export const insertUser = async userData => {
   const type = userData.type;
   const sex = userData.sex;
   const table = 'users';
+  let queryResult = null;
 
-  const queryResult =  await dbConnection(table).insert({ email: email, name:name, password:password, type:type, sex:sex });
+  try {
+    queryResult =  await dbConnection(table).insert({ 
+      email: email, 
+      name:name, 
+      password:password, 
+      type:type, sex:sex 
+    });
+  } catch(e) {
+    return false;
+  }
+  
   return queryResult.rowCount>0 ? true : false;
 };

@@ -6,8 +6,15 @@ export const verifyUser = async userData => {
   const email = userData.email;
   const password = userData.password;
   const table = 'users';
+  let queryResult = null;
 
-  const queryResult =  await dbConnection(table).where({ email: email }).select('email', 'password', 'name', 'type', 'id');
+  try {
+    queryResult =  await dbConnection(table).where({ email: email })
+    .select('email', 'password', 'name', 'type', 'id');
+  } catch(e) {
+    return null;
+  }
+  
   let passwordIsValid = bcrypt.compareSync(password, queryResult[0].password);
   
   return passwordIsValid ? queryResult[0] : null;

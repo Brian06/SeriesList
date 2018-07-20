@@ -2,17 +2,27 @@ import { dbConnection } from '../database/db';
 
 export const getUsers = async () => {
   const table = 'users';
+  let queryResult = null;
 
-  const queryResult =  await dbConnection(table).select('*');
+  try {
+    queryResult =  await dbConnection(table).select('*');
+  } catch(e) {
+    return null;
+  }
 
   return queryResult.length ? queryResult : null;
 };
 
 export const getUserById = async userId => {
   const table = 'users';
+  let queryResult = null;
 
-  const queryResult =  await dbConnection(table).where({ id: userId }).select('*');
-  
+  try {
+    queryResult =  await dbConnection(table).where({ id: userId }).select('*');
+  } catch(e) {
+    return null;
+  }
+
   return queryResult.length ? queryResult[0] : null;
 };
 
@@ -45,17 +55,27 @@ export const updateWholeUser = async userData => {
 export const updatePartialUser = async (id,body) => {
   
   const table = 'users';
+  let queryResult = null;
 
-  const queryResult =  await dbConnection(table).where('id', id).update(body);
-  
+  try {
+    queryResult =  await dbConnection(table).where('id', id).update(body);
+  } catch(e) {
+    return false;
+  }
+
   return queryResult>0 ? true : false;
 };
 
 export const deleteUser = async id => {
   
   const table = 'users';
+  let queryResult = null;
 
-  const queryResult =  await dbConnection(table).where('id', id).del();
-  
+  try {
+    queryResult =  await dbConnection(table).where('id', id).del();
+  } catch(e) {
+    return false;
+  }
+
   return queryResult>0 ? true : false;
 };
