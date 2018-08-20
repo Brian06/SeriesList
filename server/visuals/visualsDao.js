@@ -7,7 +7,7 @@ export const getVisuals = async () => {
   try {
     queryResult =  await dbConnection.select(dbConnection.raw('AVG(uv.score::float) as averageScore'),
     dbConnection.raw("count(case when uv.favorite = 'true' then 1 else null end) as numFavorites"),
-    dbConnection.raw("count(case when uv.score != 0 then 1 else null end) as numScored"),'v.name', 
+    dbConnection.raw("count(case when uv.score != 0 then 1 else null end) as numScored"),'v.name',
     'v.id', 'v.name', 'v.episodes', 'v.type', 'v.actors', 'v.alternativetitles', 'v.director', 'v.genres',
     'v.rating', 'v.realeasedate', 'v.studio', 'v.synopsis', 'v.duration')
     .from('visuals as v').leftJoin('uservisuals as uv', 'uv.idvisuals', 'v.id')
@@ -27,7 +27,7 @@ export const getVisualById = async visualId => {
     queryResult =  await dbConnection.where({'v.id':visualId})
     .select(dbConnection.raw('AVG(uv.score::float) as averageScore'),
     dbConnection.raw("count(case when uv.favorite = 'true' then 1 else null end) as numFavorites"),
-    dbConnection.raw("count(case when uv.score != 0 then 1 else null end) as numScored"),'v.name', 
+    dbConnection.raw("count(case when uv.score != 0 then 1 else null end) as numScored"),'v.name',
     'v.id', 'v.name', 'v.episodes', 'v.type', 'v.actors', 'v.alternativetitles', 'v.director', 'v.genres',
     'v.rating', 'v.realeasedate', 'v.studio', 'v.synopsis', 'v.duration')
     .from('visuals as v').leftJoin('uservisuals as uv', 'uv.idvisuals', 'v.id')
@@ -35,7 +35,7 @@ export const getVisualById = async visualId => {
   } catch(e) {
     return null;
   }
-  
+
   return queryResult.length ? queryResult[0] : null;
 };
 
@@ -73,12 +73,12 @@ export const insertVisual = async visual => {
   } catch(e) {
     return false;
   }
-  
+
   return queryResult.rowCount>0 ? true : false;
 };
 
 export const updateWholeVisual = async visual => {
-  
+
   const id = visual.id;
   const actors = visual.actors;
   const alternativeTitles = visual.alternativeTitles;
@@ -118,7 +118,7 @@ export const updateWholeVisual = async visual => {
 };
 
 export const updatePartialVisual = async (id,body) => {
-  
+
   const table = 'visuals';
   let queryResult = null;
 
@@ -132,7 +132,7 @@ export const updatePartialVisual = async (id,body) => {
 };
 
 export const deleteVisual = async id => {
-  
+
   const table = 'visuals';
   let queryResult = null;
 
@@ -141,12 +141,12 @@ export const deleteVisual = async id => {
   } catch(e) {
     return false;
   }
-  
+
   return queryResult>0 ? true : false;
 };
 
 export const addVisualToUser = async (idVisual,idUser) => {
-  
+
   const table = 'uservisuals';
   let queryResult = null;
 
@@ -160,16 +160,16 @@ export const addVisualToUser = async (idVisual,idUser) => {
 };
 
 export const getVisualsByUserId = async (idUser) => {
-  
+
   /*const table = 'uservisuals';
   let queryResult = null;
-  
+
   try {
     const queryResult =  await dbConnection(table).insert({ idVisuals:idVisual, idUser:idUser });
   } catch(e) {
     return false;
   }
-  
+
   return queryResult>0 ? true : false;*/
 };
 

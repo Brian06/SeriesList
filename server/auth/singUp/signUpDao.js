@@ -1,7 +1,7 @@
-import { dbConnection } from '../../database/db';
+import {dbConnection} from '../../database/db';
 
-//TODO add type, in the database default is user
-export const insertUser = async userData => {
+// TODO add type, in the database default is user
+export const insertUser = async (userData) => {
   const email = userData.email;
   const password = userData.password;
   const name = userData.name;
@@ -11,15 +11,15 @@ export const insertUser = async userData => {
   let queryResult = null;
 
   try {
-    queryResult =  await dbConnection(table).insert({ 
-      email: email, 
-      name:name, 
-      password:password, 
-      type:type, sex:sex 
+    queryResult = await dbConnection(table).insert({
+      email: email,
+      name: name,
+      password: password,
+      type: type,
+      sex: sex,
     });
-  } catch(e) {
+  } catch (e) {
     return false;
   }
-  
   return queryResult.rowCount>0 ? true : false;
 };

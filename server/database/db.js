@@ -1,6 +1,6 @@
-import knexBuilder from 'knex';
+import KnexBuilder from 'knex';
 
-export const dbConnection= new knexBuilder({
+export const dbConnection= new KnexBuilder({
   client: 'pg',
   connection: {
     host: '127.0.0.1',
@@ -10,5 +10,5 @@ export const dbConnection= new knexBuilder({
     password: 'paramore100',
     application_name: 'cad',
     charset: 'utf8',
-  }
+  },
 });
